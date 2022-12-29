@@ -8,11 +8,12 @@ import Registration from "../../components/Registration/Registration";
 import Login from "../../components/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import UpdateTask from "../../components/UpdateTask/UpdateTask";
+import ErrorPage from "../../components/ErrorPage/ErrorPage";
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
-        errorElement: <h1 className="text-5xl text-red-500">This is error page</h1>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/registration',
@@ -37,12 +38,12 @@ const router = createBrowserRouter([
             {
                 path: '/completedTask',
                 element: <PrivateRoute> <CompletedTask></CompletedTask> </PrivateRoute>,
-                // loader: () => fetch(`http://localhost:5000/completedTask`)
+                // loader: () => fetch(`https://task-management-server-five.vercel.app/completedTask`)
             },
             {
                 path: '/updateTask/:id',
                 element: <PrivateRoute> <UpdateTask></UpdateTask> </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/singleTask/${params.id}`)
+                loader: ({ params }) => fetch(`https://task-management-server-five.vercel.app/singleTask/${params.id}`)
             }
         ]
     }

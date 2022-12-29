@@ -14,7 +14,7 @@ const MyTask = () => {
     const { data: tasks = [], isLoading } = useQuery({
         queryKey: ['tasks', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/tasks/${user?.email}`);
+            const res = await fetch(`https://task-management-server-five.vercel.app/tasks/${user?.email}`);
             const data = res.json();
             return data;
         }
@@ -30,7 +30,7 @@ const MyTask = () => {
         const confirmation = window.confirm("Are you sure to delete this task?");
 
         if (confirmation) {
-            fetch(`http://localhost:5000/tasks/${task._id}`, {
+            fetch(`https://task-management-server-five.vercel.app/tasks/${task._id}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
@@ -44,7 +44,7 @@ const MyTask = () => {
 
     // update the status of a task........
     const handleTaskStatus = (task) => {
-        fetch(`http://localhost:5000/singleTask/${task._id}`, {
+        fetch(`https://task-management-server-five.vercel.app/singleTask/${task._id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -114,7 +114,7 @@ const MyTask = () => {
                                     )
                                 })
                                 :
-                                <tr><td className='text-center text-2xl'>No Tasks Available</td></tr>
+                                <tr><td colSpan={4} className='text-center text-2xl'>No Tasks Available</td></tr>
                         }
 
 

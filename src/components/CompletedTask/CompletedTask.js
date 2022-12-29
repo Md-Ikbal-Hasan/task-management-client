@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import Spinner from '../MiniComponent/Spinner';
 
 const CompletedTask = () => {
     // const tasks = useLoaderData();
@@ -10,7 +10,7 @@ const CompletedTask = () => {
     const { data: tasks = [], isLoading, refetch } = useQuery({
         queryKey: ['completedTask'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/completedTask/`);
+            const res = await fetch(`https://task-management-server-five.vercel.app/completedTask/`);
             const data = res.json();
             return data;
         }
@@ -22,7 +22,7 @@ const CompletedTask = () => {
         const confirmation = window.confirm("Are you sure to delete this task?");
 
         if (confirmation) {
-            fetch(`http://localhost:5000/tasks/${task._id}`, {
+            fetch(`https://task-management-server-five.vercel.app/tasks/${task._id}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
@@ -34,6 +34,11 @@ const CompletedTask = () => {
                     }
                 })
         }
+    }
+
+
+    if (isLoading) {
+        return <Spinner></Spinner>
     }
 
 

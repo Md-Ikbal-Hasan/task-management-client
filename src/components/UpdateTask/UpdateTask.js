@@ -17,9 +17,8 @@ const UpdateTask = () => {
         const taskInfo = {
             taskMessage
         }
-        console.log(taskInfo);
 
-        fetch(`http://localhost:5000/tasks/${id}`, {
+        fetch(`https://task-management-server-five.vercel.app/tasks/${id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -28,8 +27,6 @@ const UpdateTask = () => {
         })
             .then(res => res.json())
             .then((result) => {
-                console.log("updated result: ", result);
-                console.log(result);
 
                 if (result.modifiedCount > 0) {
                     toast.success("Task Updated Successfully!")
